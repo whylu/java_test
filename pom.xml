@@ -12,6 +12,8 @@
     <modules>
         <module>server_client</module>
         <module>spring_boot</module>
+        <module>ming01-spring-boot-starter</module>
+        <module>ming01-spring-boot-starter-hello</module>
     </modules>
 
     <properties>
