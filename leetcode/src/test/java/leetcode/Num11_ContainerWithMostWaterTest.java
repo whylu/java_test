@@ -2,8 +2,6 @@ package leetcode;
 
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.*;
-
 public class Num11_ContainerWithMostWaterTest {
 
     Num11_ContainerWithMostWater test = new Num11_ContainerWithMostWater();

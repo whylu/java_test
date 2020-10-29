@@ -15,6 +15,7 @@
         <module>ming01-spring-boot-starter</module>
         <module>ming01-spring-boot-starter-hello</module>
         <module>jdk_feature_test</module>
+        <module>leetcode</module>
     </modules>
 
     <properties>
