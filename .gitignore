@@ -2,3 +2,4 @@
 */.idea/**/*
 server_client/server_client.iml
 *.iml
+**/target/**/*
