@@ -1,0 +1,11 @@
+# Run
+
+run config server
+```sh
+mvn spring-boot:run
+```
+
+and try:
+```sh
+curl http://localhost:8888/a-bootiful-client
+```
