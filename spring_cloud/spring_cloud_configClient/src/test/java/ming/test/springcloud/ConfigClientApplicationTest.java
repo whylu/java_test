@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.*;
 
 import static org.assertj.core.api.Assertions.*;
@@ -15,6 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = ConfigClientApplication.class)
+@TestPropertySource(locations = "classpath:a-bootiful-client-uat.properties")
 @AutoConfigureMockMvc
 class ConfigClientApplicationTest {
 
