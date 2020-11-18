@@ -24,7 +24,6 @@ public class TestController {
     @RequestMapping("/service-instances/{applicationName}")
     public List<ServiceInstance> serviceInstancesByApplicationName(
             @PathVariable String applicationName) {
-        this.discoveryClient.
         List<ServiceInstance> instances = this.discoveryClient.getInstances(applicationName);
         ServiceInstance serviceInstance = instances.get(0);
         return this.discoveryClient.getInstances(applicationName);
