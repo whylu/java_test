@@ -8,7 +8,7 @@ public class ThreadTest {
     private static Logger logger = LoggerFactory.getLogger(ThreadTest.class);
 
     @Test
-    public void testWait() throws InterruptedException {
+    public void testWaitAndNotify() throws InterruptedException {
         logger.info("start");
 
         Thread t1 = new Thread(new WaitingTask(1));
@@ -63,7 +63,9 @@ public class ThreadTest {
                 logger.info("t-{} locked", id);
                 try {
                     logger.info("t-{} wait", id);
+                    logger.info("t-{} state = {}", id, currentThread.getState());
                     currentThread.wait();
+                    logger.info("t-{} state = {}", id, currentThread.getState());
                     logger.info("t-{} wait done", id);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -82,4 +84,73 @@ public class ThreadTest {
     }
 
 
+    @Test
+    public void testWaitAndNotifyAll() throws InterruptedException {
+        Thread main = Thread.currentThread();
+        Thread t0 = new Thread(new WaitingMainTask(main));
+        t0.start();
+        Thread t1 = new Thread(new WaitingMainTask(main));
+        t1.start();
+        Thread t2 = new Thread(new WaitingMainTask(main));
+        t2.start();
+        Thread t3 = new Thread(new WaitingMainTask(main));
+        t3.start();
+
+        Thread.sleep(2000);
+
+
+        logger.info("t0 state = {}", t0.getState());
+        logger.info("t1 state = {}", t1.getState());
+        logger.info("t2 state = {}", t2.getState());
+        logger.info("t3 state = {}", t3.getState());
+
+        synchronized (main) {
+            main.notify();
+
+            Thread.sleep(1000);
+            logger.info("t0 state = {}", t0.getState());
+            logger.info("t1 state = {}", t1.getState());
+            logger.info("t2 state = {}", t2.getState());
+            logger.info("t3 state = {}", t3.getState());
+
+        }
+
+        Thread.sleep(2000);
+        synchronized (main) {
+            main.notifyAll();
+            Thread.sleep(1000);
+            logger.info("t0 state = {}", t0.getState());
+            logger.info("t1 state = {}", t1.getState());
+            logger.info("t2 state = {}", t2.getState());
+            logger.info("t3 state = {}", t3.getState());
+        }
+
+        Thread.sleep(2000);
+        logger.info("t0 state = {}", t0.getState());
+        logger.info("t1 state = {}", t1.getState());
+        logger.info("t2 state = {}", t2.getState());
+        logger.info("t3 state = {}", t3.getState());
+    }
+
+
+    class WaitingMainTask implements Runnable {
+        private final Thread main;
+
+        public WaitingMainTask(Thread main) {
+            this.main = main;
+        }
+
+        @Override
+        public void run() {
+            synchronized (main) {
+                try {
+                    logger.info("wait main");
+                    main.wait();
+                    logger.info("wait main done");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
