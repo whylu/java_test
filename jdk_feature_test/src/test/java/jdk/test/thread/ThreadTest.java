@@ -12,6 +12,8 @@ public class ThreadTest {
         logger.info("start");
 
         Thread t1 = new Thread(new WaitingTask(1));
+        logger.info("t1.state = {}", t1.getState());
+
         t1.start();
 
         Thread t2 = new Thread(new WaitingTask(2));
@@ -20,17 +22,22 @@ public class ThreadTest {
         Thread.sleep(2000);
 
 
+        logger.info("t1.state = {}", t1.getState());
         synchronized (t1) {
-            System.out.println("notify t1");
+            logger.info("t1.state = {}", t1.getState());
+            logger.info("notify t1");
             t1.notify();
-            System.out.println("notify t1 done");
+            logger.info("notify t1 done");
+            logger.info("t1.state = {}", t1.getState());
         }
         synchronized (t2) {
-            System.out.println("notify t2");
+            logger.info("notify t2");
             t2.notify();
-            System.out.println("notify t2 done");
+            logger.info("notify t2 done");
         }
         Thread.sleep(3000);
+
+        logger.info("t1.state = {}", t1.getState());
 
         System.out.println("all done");
     }
@@ -70,6 +77,7 @@ public class ThreadTest {
             }
             logger.info("t-{} leave", id);
 
+            logger.info("t-{} state = {}", id, currentThread.getState());
         }
     }
 
