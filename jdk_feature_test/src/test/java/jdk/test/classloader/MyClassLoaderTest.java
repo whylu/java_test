@@ -14,6 +14,19 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  * ```sh
  *   javac ../../main/java/jdk/test/classloader/MyInterface.java MyClassLoaderDemoClass.java
  * ```
+ *
+ *
+ 如果classpath已經有相同名字的class，會依照 customizedClassLoader 實作有不同情況：
+ - 沒有override loadClass(String name, boolean resolve):
+ - parent如果是預設(systemClassLoader), 則會抓到classpath裡面的
+ - parent如果是null, 則會執行customizedClassLoader.findClass()
+ - override loadClass(String name, boolean resolve):
+ 根據 override 的內容
+
+ Class.forName 會拿到 classpath 裡面的 class
+ 外部class 必須從 customizedClassLoader 取得
+ jvm 裡面可以載入同樣名字的 class，存在各自的classloader裡面
+ 比如說tomcat裡面不同web app，都有自己的 classloader 運行時互不相干
  */
 public class MyClassLoaderTest {
 
