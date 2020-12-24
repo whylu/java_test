@@ -12,6 +12,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 /**
  * run this command before run test
  * ```sh
+ *   cd src/test/resources
  *   javac ../../main/java/jdk/test/classloader/MyInterface.java MyClassLoaderDemoClass.java
  * ```
  *
