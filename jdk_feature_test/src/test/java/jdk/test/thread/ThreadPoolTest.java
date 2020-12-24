@@ -29,7 +29,7 @@ public class ThreadPoolTest {
         Future<?> future2 = executor.submit(() -> {
             System.out.println("start sleep in task2");
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -39,7 +39,7 @@ public class ThreadPoolTest {
         Future<?> future1 = executor.submit(() -> {
             System.out.println("start sleep in task1");
             try {
-                Thread.sleep(500);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -50,7 +50,7 @@ public class ThreadPoolTest {
         // these 2 task will be executed in order
 
         System.out.println("keep going..");
-        Object result = future1.get(5, TimeUnit.SECONDS);
+        Object result = future1.get(2, TimeUnit.SECONDS);
         System.out.println("result2: "+ future2.get());
         System.out.println("result1: "+ result);
     }
@@ -62,7 +62,7 @@ public class ThreadPoolTest {
         for (int i = 0; i < 30; i++) {
             executor.execute(new SleepTask(i));
         }
-        Thread.sleep(20000);
+        Thread.sleep(3000);
     }
 
     class SleepTask implements Runnable {
@@ -75,7 +75,7 @@ public class ThreadPoolTest {
         public void run() {
             System.out.println("start sleep in task"+id);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -101,8 +101,8 @@ public class ThreadPoolTest {
             executorService.scheduleWithFixedDelay(new SleepTask(i), 0, 100, TimeUnit.MILLISECONDS);
         }
 
-        Thread.sleep(20000);
-        Thread.sleep(20000);
+        Thread.sleep(2000);
+        Thread.sleep(2000);
 
     }
 
