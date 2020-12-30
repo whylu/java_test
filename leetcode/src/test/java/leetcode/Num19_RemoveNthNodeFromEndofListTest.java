@@ -35,7 +35,27 @@ public class Num19_RemoveNthNodeFromEndofListTest {
         ListNode head = new ListNode(1,
                 new ListNode(2));
         ListNode listNode = s.removeNthFromEnd(head, 2);
-        System.out.println(listNode);
+        System.out.println(listNode); // 2
     }
+
+
+    @Test
+    public void test4() {
+        Num19_RemoveNthNodeFromEndofList s = new Num19_RemoveNthNodeFromEndofList();
+        ListNode head = new ListNode(1,
+                new ListNode(2, new ListNode(3)));
+        ListNode listNode = s.removeNthFromEnd(head, 1);
+        System.out.println(listNode); // 1 -> 2
+    }
+
+    @Test
+    public void test5() {
+        Num19_RemoveNthNodeFromEndofList s = new Num19_RemoveNthNodeFromEndofList();
+        ListNode head = new ListNode(1,
+                new ListNode(2));
+        ListNode listNode = s.removeNthFromEnd(head, 1);
+        System.out.println(listNode); // 1
+    }
+
 
 }
