@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ming01.houseRenting.mapper.BadRentMapper">
+
+    <insert id="insertBadRent" parameterType="BadRent">
+        INSERT INTO bad_rent(address, rent_price, message, longitude, latitude, submit_time)
+        values (#{badRent.address},
+                #{badRent.rentPrice},
+                #{badRent.message},
+                #{badRent.longitude},
+                #{badRent.latitude},
+                (extract(epoch from now() at time zone 'UTC')*1000)::bigint
+        )
+    </insert>
+
+
+</mapper>

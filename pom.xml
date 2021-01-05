@@ -16,6 +16,7 @@
         <module>ming01-spring-boot-starter-hello</module>
         <module>jdk_feature_test</module>
         <module>leetcode</module>
+        <module>mybatis-h2</module>
     </modules>
 
     <properties>
